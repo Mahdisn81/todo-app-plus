@@ -1,0 +1,2400 @@
+/* ==========================================================================
+   تسک‌ها — tasks.css
+   Table of contents:
+   1. Page Header
+   2. Tasks Layout (two columns)
+   3. Task List Panel — Filters
+   4. Task List Panel — Status Tabs
+   5. Task Rows
+   6. Load More Button
+   7. Create Task Panel — Head
+   8. Form Groups / Inputs
+   9. Pill Select (category)
+   10. Priority Select
+   11. Select Wrap (reminder)
+   12. Primary Gradient Button
+   13. Checkbox Row
+   14. Toasts
+   15. Responsive
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. PAGE HEADER
+   ========================================================================== */
+.page-header h2 {
+  font-size: 30px;
+  color: var(--text-primary);
+}
+
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  margin-top: 6px;
+}
+
+
+/* ==========================================================================
+   2. TASKS LAYOUT
+   ========================================================================== */
+.tasks-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.task-list-panel {
+  order: 2;
+  flex: 1 1 620px;
+  min-width: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ستون سمت راست: فرم ایجاد */
+.tasks-side {
+  order: 1;
+  flex: 0 0 360px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ستون سمت چپ: تقویم + نقل‌قول (هم‌تراز با بقیه آیتم‌های صفحه) */
+.tasks-calendar {
+  order: 3;
+  flex: 0 0 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.create-task-panel {
+  padding: 24px;
+}
+
+
+/* ==========================================================================
+   3. TASK LIST PANEL — FILTERS
+   ========================================================================== */
+.task-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.filter-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: all 0.25s var(--ease);
+}
+
+.filter-select-btn i {
+  font-size: 10px;
+  transition: transform 0.25s var(--ease);
+}
+
+.filter-select-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.filter-select.open .filter-select-btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--purple-soft);
+}
+
+.filter-select.open .filter-select-btn i {
+  transform: rotate(180deg);
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 170px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hover);
+  padding: 8px;
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filter-select.open .filter-dropdown {
+  display: flex;
+  animation: fadeInUp 0.2s var(--ease) both;
+}
+
+.filter-dropdown li {
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.filter-dropdown li:hover {
+  background: var(--bg);
+}
+
+.filter-dropdown li.active {
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.filter-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex: 0 0 auto;
+  transition: all 0.25s var(--ease);
+}
+
+.filter-icon-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.filter-search {
+  position: relative;
+  flex: 1 1 200px;
+  min-width: 160px;
+}
+
+.filter-search input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 10px 42px 10px 16px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.25s var(--ease);
+}
+
+.filter-search input::placeholder {
+  color: #A9ACC0;
+}
+
+.filter-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.1);
+}
+
+.filter-search i {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   4. TASK LIST PANEL — STATUS TABS
+   ========================================================================== */
+.task-tabs {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.task-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  padding: 6px 2px 14px;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.25s var(--ease);
+}
+
+.task-tab b {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+}
+
+.task-tab:hover {
+  color: var(--primary);
+}
+
+.task-tab.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.task-tab.active b {
+  color: var(--primary);
+}
+
+.task-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+}
+
+.task-tab .tab-icon--green { color: var(--green); }
+.task-tab .tab-icon--orange { color: var(--orange); }
+.task-tab .tab-icon--red { color: #F16A6A; }
+.task-tab .tab-icon--gray { color: #A9ACC0; }
+
+
+/* ==========================================================================
+   5. TASK ROWS
+   ========================================================================== */
+.task-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  animation: fadeInUp 0.4s var(--ease) both;
+  position: relative;
+  z-index: 1;
+}
+
+.task-row:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: #E2DEFB;
+  z-index: 2;
+}
+
+/* وقتی زیرمجموعه‌ها بازن، ردیف نباید بالا بپره (از بخش زیرمجموعه جدا می‌شد) */
+.task-row.expanded:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Lifted above every sibling row while its ⋯ menu is open, so the
+   dropdown never renders underneath the next task card. */
+.task-row.menu-open {
+  z-index: 30;
+}
+
+.task-row.removing {
+  opacity: 0;
+  transform: translateX(24px) scale(0.97);
+}
+
+/* status icon (right-most) */
+.task-status-icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 2px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.25s var(--ease);
+}
+
+.task-status-icon:hover {
+  transform: scale(1.08);
+}
+
+.task-status-icon.status-completed {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.task-status-icon.status-in-progress {
+  background: var(--purple-soft);
+  border-color: var(--purple-soft);
+  color: var(--primary);
+}
+
+.task-status-icon.status-in-progress i {
+  animation: spin 2.4s linear infinite;
+}
+
+.task-status-icon.status-overdue {
+  background: #fff;
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.task-status-icon.status-pending {
+  background: #fff;
+  border-color: var(--border);
+  color: transparent;
+}
+
+.task-status-icon.status-cancelled {
+  background: #FDEAEC;
+  border-color: #FDEAEC;
+  color: #F16A6A;
+}
+
+/* three-dot menu */
+.task-menu {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.task-menu-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+  transition: all 0.25s var(--ease);
+}
+
+.task-menu-btn:hover {
+  background: var(--bg);
+  color: var(--primary);
+}
+
+.task-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 150px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hover);
+  padding: 6px;
+  z-index: 35;
+  display: none;
+  flex-direction: column;
+}
+
+.task-menu.open .task-menu-dropdown {
+  display: flex;
+  animation: fadeInUp 0.2s var(--ease) both;
+}
+
+.task-menu-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-primary);
+  text-align: right;
+  transition: background 0.2s var(--ease);
+}
+
+.task-menu-dropdown button:hover {
+  background: var(--bg);
+}
+
+.task-menu-dropdown button.danger {
+  color: #F16A6A;
+}
+
+.task-menu-dropdown button.danger:hover {
+  background: #FDEAEC;
+}
+
+/* title + category */
+.task-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.task-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-row.status-completed .task-title {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.task-category {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* priority */
+.task-priority {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-primary);
+  min-width: 64px;
+  justify-content: center;
+}
+
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.priority-dot--red { background: #F16A6A; }
+.priority-dot--orange { background: var(--orange); }
+.priority-dot--green { background: var(--green); }
+
+/* date + status label */
+.task-date-status {
+  flex: 0 0 auto;
+  min-width: 92px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.task-status-label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.task-status-label.status-completed { color: var(--green); }
+.task-status-label.status-in-progress { color: var(--primary); }
+.task-status-label.status-overdue { color: var(--orange); }
+.task-status-label.status-pending { color: var(--text-secondary); }
+.task-status-label.status-cancelled { color: #F16A6A; }
+
+/* select checkbox (far left) */
+.task-select {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  transition: all 0.25s var(--ease);
+}
+
+.task-select:hover {
+  border-color: var(--primary);
+}
+
+/* empty state */
+.task-empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-secondary);
+}
+
+.task-empty-state i {
+  font-size: 34px;
+  color: #D9D9F0;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.task-empty-state p {
+  font-size: 13.5px;
+}
+
+
+/* ==========================================================================
+   6. LOAD MORE BUTTON
+   ========================================================================== */
+.load-more-btn {
+  margin-top: 16px;
+}
+
+.load-more-btn.hidden {
+  display: none;
+}
+
+
+/* ==========================================================================
+   7. CREATE TASK PANEL — HEAD
+   ========================================================================== */
+.create-task-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.fab-add {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex: 0 0 auto;
+  box-shadow: 0 10px 22px rgba(124, 92, 252, 0.32);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.fab-add:hover {
+  transform: rotate(90deg) scale(1.06);
+  box-shadow: 0 14px 28px rgba(124, 92, 252, 0.4);
+}
+
+.create-task-head h3 {
+  font-size: 18px;
+}
+
+
+/* ==========================================================================
+   8. FORM GROUPS / INPUTS
+   ========================================================================== */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 9px;
+}
+
+.form-control-soft {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.25s var(--ease);
+  resize: none;
+}
+
+.form-control-soft::placeholder {
+  color: #A9ACC0;
+}
+
+.form-control-soft:hover {
+  border-color: #D9D9F0;
+}
+
+.form-control-soft:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.12);
+}
+
+.form-group.invalid .form-control-soft {
+  border-color: #F16A6A;
+  background: #FFF6F6;
+}
+
+.field-error {
+  display: none;
+  color: #F16A6A;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.form-group.invalid .field-error {
+  display: block;
+  animation: fadeInUp 0.25s var(--ease) both;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-wrap input {
+  padding-left: 40px;
+}
+
+.input-icon-wrap i {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   9. PILL SELECT (category)
+   ========================================================================== */
+.pill-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill-option {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 15px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: all 0.25s var(--ease);
+}
+
+.pill-option i {
+  font-size: 12px;
+}
+
+.pill-option:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pill-option.active {
+  background: var(--purple-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.pill-option[data-value="more"] {
+  padding: 10px 13px;
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================================================
+   10. PRIORITY SELECT
+   ========================================================================== */
+.priority-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priority-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  transition: all 0.25s var(--ease);
+}
+
+.priority-option:hover {
+  border-color: #D9D9F0;
+}
+
+.priority-option.active {
+  border-width: 2px;
+  font-weight: 700;
+}
+
+.priority-option.active[data-value="بالا"] {
+  border-color: #F16A6A;
+  background: #FFF6F6;
+}
+
+.priority-option.active[data-value="متوسط"] {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.priority-option.active[data-value="پایین"] {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+
+/* ==========================================================================
+   11. SELECT WRAP (reminder dropdown)
+   ========================================================================== */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 40px 12px 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.select-wrap select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.12);
+}
+
+.select-wrap i {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   12. PRIMARY GRADIENT BUTTON
+   ========================================================================== */
+.btn-primary-gradient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  margin-top: 6px;
+  box-shadow: 0 12px 24px rgba(124, 92, 252, 0.28);
+  transition: all 0.3s var(--ease);
+}
+
+.btn-primary-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(124, 92, 252, 0.36);
+}
+
+.btn-primary-gradient:active {
+  transform: translateY(0);
+}
+
+.btn-primary-gradient.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   13. CHECKBOX ROW
+   ========================================================================== */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-row input {
+  display: none;
+}
+
+.checkbox-box {
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: transparent;
+  transition: all 0.25s var(--ease);
+  flex: 0 0 auto;
+}
+
+.checkbox-row input:checked + .checkbox-box {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+
+/* ==========================================================================
+   14. TOASTS
+   ========================================================================== */
+.toast-stack {
+  position: fixed;
+  bottom: 26px;
+  left: 26px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 13px 18px;
+  font-size: 13px;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-hover);
+  animation: toastIn 0.35s var(--ease) both;
+  min-width: 220px;
+}
+
+.toast-item i {
+  color: var(--green);
+  font-size: 15px;
+}
+
+.toast-item.toast-danger i {
+  color: #F16A6A;
+}
+
+.toast-item.leaving {
+  animation: toastOut 0.3s var(--ease) both;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(14px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* ==========================================================================
+   15. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1400px) {
+  .tasks-side {
+    flex: 0 0 320px;
+    width: 320px;
+  }
+
+  .tasks-calendar {
+    flex: 0 0 280px;
+    width: 280px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .tasks-layout {
+    flex-direction: column;
+  }
+
+  .task-list-panel,
+  .tasks-side,
+  .tasks-calendar {
+    width: 100%;
+    flex: 1 1 auto;
+    order: initial;
+  }
+
+  .task-list-panel { order: 1; }
+  .tasks-side { order: 2; }
+  .tasks-calendar { order: 3; }
+}
+
+@media (max-width: 768px) {
+  .task-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-select,
+  .filter-icon-btn,
+  .filter-search {
+    width: 100%;
+  }
+
+  .filter-select-btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filter-icon-btn {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .task-row {
+    flex-wrap: wrap;
+  }
+
+  .task-info {
+    order: 5;
+    flex: 1 1 100%;
+    margin-top: 6px;
+  }
+
+  .task-priority {
+    margin-inline-start: auto;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .task-date-status {
+    min-width: 76px;
+    font-size: 11.5px;
+  }
+
+  .task-priority {
+    font-size: 12px;
+    min-width: auto;
+  }
+
+  .pill-option span,
+  .pill-option {
+    font-size: 12px;
+  }
+}
+
+
+/* ==========================================================================
+   16. MINI ADD FORM (چک‌لیست امروز / اهداف) — داشبورد و گزارش‌ها
+   ========================================================================== */
+.mini-add-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mini-add-input,
+.mini-add-time,
+.mini-add-num {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.25s var(--ease);
+}
+
+.mini-add-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.mini-add-time {
+  flex: 0 0 84px;
+  text-align: center;
+}
+
+.mini-add-num {
+  flex: 0 0 76px;
+  text-align: center;
+}
+
+.mini-add-input::placeholder,
+.mini-add-time::placeholder,
+.mini-add-num::placeholder {
+  color: #A9ACC0;
+}
+
+.mini-add-input:focus,
+.mini-add-time:focus,
+.mini-add-num:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.1);
+}
+
+.mini-add-btn {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(124, 92, 252, 0.28);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.mini-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(124, 92, 252, 0.36);
+}
+
+.goal-add-form {
+  flex-wrap: wrap;
+}
+
+.goal-add-form .mini-add-input {
+  flex: 1 1 100%;
+}
+
+
+/* ==========================================================================
+   17. ITEM DELETE BUTTON (چک‌لیست داشبورد)
+   ========================================================================== */
+.item-delete-btn {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.25s var(--ease);
+}
+
+.task-item:hover .item-delete-btn {
+  opacity: 1;
+}
+
+.item-delete-btn:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+
+/* ==========================================================================
+   18. GOAL ACTIONS (افزایش/کاهش/حذف هدف)
+   ========================================================================== */
+.goal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.goal-step-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--ease);
+}
+
+.goal-step-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.goal-del-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+  transition: all 0.25s var(--ease);
+}
+
+.goal-del-btn:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+
+/* ==========================================================================
+   19. PANEL LINK (لینک کنار عنوان پنل)
+   ========================================================================== */
+.panel-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--primary);
+  transition: opacity 0.25s var(--ease);
+}
+
+.panel-link:hover {
+  opacity: 0.7;
+}
+
+
+/* ==========================================================================
+   20. INLINE EDIT MODE (ویرایش تسک داخل ردیف)
+   ========================================================================== */
+.task-row.editing {
+  background: #FBFAFF;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.1);
+  cursor: default;
+}
+
+.inline-edit-input {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.inline-edit-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.12);
+}
+
+.inline-edit-title {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.inline-edit-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='%237D8198'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 8px center;
+  background-size: 9px;
+  padding-left: 26px;
+  cursor: pointer;
+}
+
+.inline-edit-priority {
+  min-width: 90px;
+}
+
+.inline-edit-date {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+.inline-edit-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.inline-save {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s var(--ease);
+}
+
+.inline-save:hover {
+  transform: scale(1.1);
+}
+
+.inline-cancel {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s var(--ease);
+}
+
+.inline-cancel:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+
+/* ==========================================================================
+   21. FINANCE PAGE
+   ========================================================================== */
+.finance-value--neg {
+  color: #F16A6A;
+}
+
+.finance-chart-body {
+  margin-bottom: 0;
+}
+
+.expense-chart-wrap--lg {
+  width: 200px;
+  height: 200px;
+  flex: 0 0 200px;
+}
+
+.muted-count {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Color picker */
+.color-picker {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.color-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--border);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease);
+}
+
+.color-dot:hover {
+  transform: scale(1.12);
+}
+
+.color-dot.active {
+  box-shadow: 0 0 0 2px var(--primary);
+  transform: scale(1.12);
+}
+
+/* Expense list / table */
+.expense-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expense-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  transition: background 0.25s var(--ease);
+}
+
+.expense-row:hover {
+  background: var(--bg);
+}
+
+.expense-row--foot {
+  background: var(--purple-soft);
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.exp-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.exp-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.exp-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.exp-bar {
+  height: 6px;
+  background: var(--gray-soft);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.exp-bar span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s var(--ease);
+}
+
+.exp-pct {
+  flex: 0 0 48px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.exp-value {
+  flex: 0 0 auto;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.exp-del {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--ease);
+}
+
+.exp-del:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+
+/* ==========================================================================
+   22. MODAL (ویرایش درآمد/بودجه)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(37, 39, 61, 0.4);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay.show {
+  display: flex;
+  animation: fadeInUp 0.25s var(--ease) both;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: var(--shadow-hover);
+  animation: fadeInUp 0.3s var(--ease) both;
+}
+
+.modal-box h3 {
+  font-size: 18px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.btn-ghost {
+  flex: 1;
+  padding: 13px;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.25s var(--ease);
+}
+
+.btn-ghost:hover {
+  background: var(--gray-soft);
+}
+
+.modal-actions .btn-primary-gradient {
+  flex: 1;
+  margin-top: 0;
+  padding: 13px;
+}
+
+
+/* ==========================================================================
+   23. RESOURCES PAGE
+   ========================================================================== */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.resource-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+
+/* ==========================================================================
+   24. SUBTASKS (زیرمجموعه‌ها)
+   ========================================================================== */
+
+/* ----- wrapper: ردیف اصلی + بخش زیرمجموعه‌ها ----- */
+.task-row-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-row-wrapper .task-row {
+  animation: none; /* ردیف‌ها داخل wrapper خودشان انیمیشن fadeInUp را از طریق container نمی‌گیرند */
+}
+
+/* وقتی زیرمجموعه‌ها بازن، گوشه‌ی پایین ردیف تیز میشه تا به بخش زیرمجموعه وصل بشه */
+.task-row.expanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+}
+.task-row-wrapper > .task-row {
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+/* ----- badge شمارش زیرمجموعه‌ها روی عنوان ----- */
+.subtask-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 8px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+.subtask-count-badge:hover {
+  background: #E2DEFB;
+}
+.subtask-count-badge i {
+  font-size: 10px;
+}
+.subtask-count-badge .subtask-badge-chevron {
+  font-size: 9px;
+  margin-inline-start: 2px;
+  transition: transform 0.25s var(--ease);
+}
+.subtask-count-badge.open .subtask-badge-chevron {
+  transform: rotate(180deg);
+}
+
+/* ----- دکمه دراپ‌داون (فلش) کنار ردیف تسک ----- */
+.task-dropdown-btn {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.task-dropdown-btn:hover {
+  background: var(--purple-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.task-dropdown-btn i {
+  transition: transform 0.25s var(--ease);
+}
+
+.task-dropdown-btn.open {
+  background: var(--purple-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.task-dropdown-btn.open i {
+  transform: rotate(180deg);
+}
+
+/* ----- بخش زیرمجموعه‌ها (زیر ردیف) ----- */
+.task-subtasks {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  padding: 10px 14px 12px;
+  animation: fadeInUp 0.25s var(--ease) both;
+}
+
+.subtasks-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: 0;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px dashed var(--border);
+}
+.subtasks-head i {
+  color: var(--primary);
+  font-size: 12px;
+}
+
+/* ----- لیست زیرمجموعه‌ها ----- */
+.subtask-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtask-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(124, 92, 252, 0.08);
+  transition: background 0.2s var(--ease);
+}
+.subtask-row:last-child {
+  border-bottom: none;
+}
+.subtask-row:hover {
+  background: rgba(124, 92, 252, 0.04);
+  border-radius: var(--radius-sm);
+}
+
+/* چک‌باکس زیرمجموعه */
+.subtask-check {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 9px;
+  color: #fff;
+  transition: all 0.2s var(--ease);
+}
+.subtask-check:hover {
+  border-color: var(--primary);
+}
+.subtask-row.completed .subtask-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+.subtask-check i {
+  font-size: 9px;
+}
+
+/* عنوان زیرمجموعه */
+.subtask-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.subtask-row.completed .subtask-title {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+/* متادیتای زیرمجموعه */
+.subtask-meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.subtask-badge {
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--gray-soft);
+  font-size: 10.5px;
+}
+.subtask-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.subtask-date {
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+}
+
+/* دکمه‌های ویرایش/حذف زیرمجموعه */
+.subtask-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+}
+.subtask-row:hover .subtask-actions {
+  opacity: 1;
+}
+.subtask-action-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.subtask-action-btn:hover {
+  background: var(--purple-soft);
+  color: var(--primary);
+}
+.subtask-action-btn.danger:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+.subtask-action-btn.save {
+  background: var(--green);
+  color: #fff;
+}
+.subtask-action-btn.save:hover {
+  background: #28c084;
+}
+.subtask-action-btn.cancel:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+/* ----- حالت ویرایش inline زیرمجموعه ----- */
+.subtask-row.editing {
+  background: #FBFAFF;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+}
+.subtask-edit-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+.subtask-edit-input,
+.subtask-edit-select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.subtask-edit-input:focus,
+.subtask-edit-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.12);
+}
+.subtask-edit-input[data-field="title"] {
+  flex: 1 1 160px;
+  min-width: 120px;
+}
+.subtask-edit-select {
+  flex: 0 0 auto;
+}
+.subtask-edit-date {
+  width: 92px;
+}
+
+/* ----- فرم افزودن زیرمجموعه ----- */
+.subtask-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.subtask-form-input,
+.subtask-form-select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.subtask-form-input:focus,
+.subtask-form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.12);
+}
+.subtask-form-input[name="title"] {
+  flex: 1 1 180px;
+  min-width: 120px;
+}
+.subtask-form-date {
+  width: 96px;
+}
+.subtask-form-select {
+  flex: 0 0 auto;
+}
+.subtask-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+}
+.subtask-add-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-1px);
+}
+.subtask-add-btn:active {
+  transform: translateY(0);
+}
+
+/* ----- پیام خالی ----- */
+.subtask-empty {
+  text-align: center;
+  padding: 16px 8px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+}
+.subtask-empty i {
+  font-size: 18px;
+  color: #D9D9F0;
+  margin-inline-end: 6px;
+}
+
+
+/* ==========================================================================
+   25. RESPONSIVE — SUBTASKS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .subtask-meta {
+    display: none; /* روی موبایل متادیتا جمع میشه، فقط عنوان و چک‌باکس */
+  }
+  .subtask-row .subtask-actions {
+    opacity: 1; /* روی موبایل دکمه‌ها همیشه قابل دسترسن */
+  }
+  .subtask-form {
+    flex-wrap: wrap;
+  }
+  .subtask-form-input,
+  .subtask-form-select,
+  .subtask-add-btn {
+    flex: 1 1 100%;
+  }
+  .subtask-add-btn {
+    justify-content: center;
+  }
+  .task-subtasks {
+    padding: 8px 10px 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .subtask-edit-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .subtask-edit-input,
+  .subtask-edit-select,
+  .subtask-edit-date {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+}
+
+.resource-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.resource-thumb {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  color: #fff;
+}
+
+.resource-thumb--purple { background: linear-gradient(135deg, #7C5CFC, #9C7CFF); }
+.resource-thumb--orange { background: linear-gradient(135deg, #FFA451, #FFC089); }
+.resource-thumb--green  { background: linear-gradient(135deg, #2ECC91, #5FD9AD); }
+.resource-thumb--blue   { background: linear-gradient(135deg, #4FA3F7, #7DBBFA); }
+.resource-thumb--pink   { background: linear-gradient(135deg, #FF6FA5, #FF9BBD); }
+.resource-thumb--gray   { background: linear-gradient(135deg, #8A8DA3, #B3B5C6); }
+
+.resource-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resource-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--purple-soft);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.resource-body h3 {
+  font-size: 17px;
+  color: var(--text-primary);
+}
+
+.resource-body p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.resource-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+
+/* ==========================================================================
+   24. ABOUT PAGE
+   ========================================================================== */
+.about-hero {
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(160deg, #fff 0%, var(--purple-soft) 120%);
+}
+
+.about-hero-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-size: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 30px rgba(124, 92, 252, 0.3);
+}
+
+.about-hero h2 {
+  font-size: 26px;
+}
+
+.about-hero p {
+  max-width: 640px;
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--text-secondary);
+}
+
+.section-subtitle {
+  font-size: 18px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+.about-feat {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-feat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.about-feat h4 {
+  font-size: 16px;
+}
+
+.about-feat p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.about-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.about-steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.about-steps a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.about-steps a:hover {
+  text-decoration: underline;
+}
+
+.step-num {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-tech {
+  padding: 24px;
+}
+
+.about-tech h4 {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.about-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-tech-list span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.about-tech-list i {
+  color: var(--primary);
+  font-size: 15px;
+}
+
+.about-note {
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+
+/* ==========================================================================
+   25. RESPONSIVE — صفحات جدید
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .finance-chart-body {
+    flex-direction: column;
+  }
+
+  .expense-chart-wrap--lg {
+    margin: 0 auto;
+  }
+
+  .expense-row {
+    flex-wrap: wrap;
+  }
+
+  .exp-info {
+    flex: 1 1 100%;
+    order: -1;
+  }
+
+  .mini-add-form {
+    flex-wrap: wrap;
+  }
+
+  .mini-add-input {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ==========================================================================
+   26. CALENDAR (تقویم صفحه تسک‌ها)
+   ========================================================================== */
+.calendar-card {
+  padding: 20px;
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.calendar-nav {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.calendar-nav:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.calendar-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.calendar-title h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.calendar-today-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--purple-soft);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.25s var(--ease);
+}
+
+.calendar-today-btn:hover {
+  background: #E2DEFB;
+}
+
+.calendar-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calendar-dow span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 6px 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s var(--ease);
+}
+
+.cal-day.empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.cal-day:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.cal-day.has-tasks::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.cal-day.today {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.cal-day.selected {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.cal-day.selected.has-tasks::after {
+  background: #fff;
+}
+
+.calendar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.calendar-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--purple-soft);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: background 0.25s var(--ease);
+}
+
+.calendar-clear-btn:hover {
+  background: #E2DEFB;
+}
+
+.calendar-clear-btn.hidden {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .cal-day {
+    height: 32px;
+    font-size: 12px;
+  }
+}

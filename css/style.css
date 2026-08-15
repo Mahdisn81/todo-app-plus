@@ -1,1 +1,1740 @@
+/* ==========================================================================
+   رشد من — Dashboard Stylesheet
+   Table of contents:
+   1. CSS Variables
+   2. Base / Reset
+   3. Layout Shell (Topbar / Sidebar / Main)
+   4. Topbar
+   5. Sidebar
+   6. Greeting Section
+   7. Stat Cards
+   8. Panel Cards (generic)
+   9. Expense Card + Legend
+   10. Task List
+   11. Calendar
+   12. Weekly Progress Chart
+   13. Goals Card
+   14. Quote Card
+   15. Buttons
+   16. Animations
+   17. Scrollbars
+   18. Responsive Breakpoints
+   ========================================================================== */
 
+
+/* ==========================================================================
+   1. CSS VARIABLES
+   ========================================================================== */
+:root {
+  /* Brand */
+  --primary: #7C5CFC;
+  --primary-rgb: 124, 92, 252;
+  --secondary: #9C7CFF;
+
+  /* Surfaces */
+  --bg: #F8F9FF;
+  --card: #FFFFFF;
+  --border: #ECECFA;
+
+  /* Text */
+  --text-primary: #25273D;
+  --text-secondary: #7D8198;
+
+  /* Accents */
+  --green: #2ECC91;
+  --green-soft: #E4F9F1;
+  --orange: #FFA451;
+  --orange-soft: #FFF1E2;
+  --blue: #4FA3F7;
+  --blue-soft: #E7F3FF;
+  --purple-soft: #F1ECFF;
+  --pink: #FF6FA5;
+  --gray-soft: #EFEFF5;
+
+  /* Radii */
+  --radius-lg: 26px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(124, 92, 252, 0.08);
+  --shadow-card: 0 6px 24px rgba(37, 39, 61, 0.05);
+  --shadow-hover: 0 16px 36px rgba(124, 92, 252, 0.14);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --sidebar-w: 300px;
+  --topbar-h: 92px;
+}
+
+/* ==========================================================================
+   2. BASE / RESET
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Generic card */
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+
+/* ==========================================================================
+   3. LAYOUT SHELL
+   ========================================================================== */
+.app-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  max-width: 1720px;
+  margin: 0 auto;
+  padding: 24px 32px 48px;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* ==========================================================================
+   4. TOPBAR
+   ========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(248, 249, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar-inner {
+  max-width: 1720px;
+  margin: 0 auto;
+  height: var(--topbar-h);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0 8px 18px rgba(124, 92, 252, 0.3);
+}
+
+.brand-text h1 {
+  font-size: 19px;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.brand-text span {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+/* Center menu */
+.topbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 6px;
+  box-shadow: var(--shadow-card);
+}
+
+.menu-pill {
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s var(--ease);
+  white-space: nowrap;
+}
+
+.menu-pill:hover {
+  color: var(--primary);
+  background: var(--purple-soft);
+}
+
+.menu-pill.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(124, 92, 252, 0.28);
+}
+
+/* Actions */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 200px;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  transition: all 0.3s var(--ease);
+}
+
+.icon-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.notif-dot {
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pink);
+  border: 2px solid #fff;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+
+/* ==========================================================================
+   5. SIDEBAR
+   ========================================================================== */
+/* دسکتاپ/تبلت (≥992px): سایدبار به‌صورت ستون معمولی و چسبان نمایش داده می‌شود.
+   بوت‌استرپ در offcanvas-lg خودش از ۹۹۲px به بالا position را static و
+   visibility را visible می‌کند؛ اینجا فقط چیدمان ستونی را روی آن اضافه می‌کنیم. */
+@media (min-width: 992px) {
+  .sidebar {
+    flex: 0 0 var(--sidebar-w);
+    width: var(--sidebar-w);
+    position: sticky;
+    top: calc(var(--topbar-h) + 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* موبایل (زیر ۹۹۲px): ظاهر آفکانواس (این بخش‌ها روی رفتار fixed/transform/backdrop
+   استاندارد بوت‌استرپ فقط جنبه بصری اضافه می‌کنند، دخالتی در موقعیت‌دهی ندارند) */
+.sidebar.offcanvas {
+  --bs-offcanvas-width: var(--sidebar-w);
+  --bs-offcanvas-bg: var(--bg);
+  --bs-offcanvas-padding-x: 20px;
+  --bs-offcanvas-padding-y: 20px;
+  --bs-offcanvas-box-shadow: -18px 0 40px rgba(37, 39, 61, 0.12);
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.sidebar-menu {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s var(--ease);
+}
+
+.sidebar-item i {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  transition: color 0.3s var(--ease);
+}
+
+.sidebar-item:hover {
+  background: var(--purple-soft);
+  color: var(--primary);
+  transform: translateX(-3px);
+}
+
+.sidebar-item:hover i {
+  color: var(--primary);
+}
+
+.sidebar-item.active {
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.sidebar-item.active i {
+  color: var(--primary);
+}
+
+/* Quote Card lives inside sidebar on desktop */
+.quote-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px 140px;
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(124, 92, 252, 0.3);
+}
+
+.quote-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.quote-card h4 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.quote-card p {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+  z-index: 2;
+}
+
+.quote-mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 1;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+
+/* ==========================================================================
+   6. GREETING SECTION
+   ========================================================================== */
+.greeting-section h2 {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.greeting-section .wave {
+  display: inline-block;
+  animation: wave 2.2s infinite;
+  transform-origin: 70% 70%;
+}
+
+.greeting-section p {
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  margin-top: 6px;
+}
+
+
+/* ==========================================================================
+   7. STAT CARDS
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.stat-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat-card-head h3 {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.stat-icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.stat-icon.sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.stat-icon--green { background: var(--green-soft); color: var(--green); }
+.stat-icon--purple { background: var(--purple-soft); color: var(--primary); }
+.stat-icon--orange { background: var(--orange-soft); color: var(--orange); }
+.stat-icon--blue { background: var(--blue-soft); color: var(--blue); }
+
+.stat-number {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-number--fa {
+  font-size: 30px;
+}
+
+.stat-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.stat-foot {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+}
+
+/* Soft progress bar */
+.soft-progress {
+  height: 8px;
+  background: var(--gray-soft);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.soft-progress .progress-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 1.2s var(--ease);
+}
+
+/* Finance card specifics */
+.stat-card--finance {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F6FFFB 100%);
+}
+
+.finance-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.finance-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+}
+
+.finance-label {
+  color: var(--text-secondary);
+}
+
+.finance-value {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.finance-value--pos { color: var(--green); }
+.finance-value--neg { color: #F16A6A; }
+.finance-value--main { color: var(--text-primary); }
+
+
+/* ==========================================================================
+   8. PANEL CARDS (generic containers for mid/bottom rows)
+   ========================================================================== */
+.mid-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.15fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.panel-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.panel-head .panel-title {
+  margin-bottom: 0;
+}
+
+.panel-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--purple-soft);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+
+/* ==========================================================================
+   9. EXPENSE CARD + LEGEND
+   ========================================================================== */
+.expense-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  margin-bottom: 18px;
+}
+
+.expense-chart-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex: 0 0 150px;
+}
+
+.expense-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-legend li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-secondary);
+  min-width: 0;
+}
+
+.legend-left span.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.legend-value {
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   10. TASK LIST
+   ========================================================================== */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.25s var(--ease);
+}
+
+.task-item:hover {
+  background: var(--bg);
+}
+
+.task-time {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  flex: 0 0 48px;
+}
+
+.task-name {
+  flex: 1;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.task-item.completed .task-name {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.task-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  flex: 0 0 auto;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.task-item.completed .task-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+
+/* ==========================================================================
+   11. CALENDAR
+   ========================================================================== */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cal-month {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cal-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.25s var(--ease);
+}
+
+.cal-arrow:hover {
+  background: var(--purple-soft);
+  color: var(--primary);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.cal-dow {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  padding-bottom: 6px;
+  font-weight: 600;
+}
+
+.cal-day {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  border-radius: 50%;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.cal-day:hover {
+  background: var(--purple-soft);
+  color: var(--primary);
+}
+
+.cal-day.muted {
+  color: #C9CBDA;
+}
+
+.cal-day.selected {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(124, 92, 252, 0.35);
+}
+
+.cal-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-top: auto;
+}
+
+.cal-event-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-top: 6px;
+  flex: 0 0 auto;
+}
+
+.cal-event-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12.5px;
+}
+
+.cal-event-title {
+  color: var(--text-secondary);
+  font-size: 11.5px;
+}
+
+.cal-event-text strong {
+  font-size: 13.5px;
+  color: var(--text-primary);
+}
+
+.cal-event-time {
+  color: var(--text-secondary);
+  font-size: 11.5px;
+}
+
+
+/* ==========================================================================
+   12. WEEKLY PROGRESS CHART
+   ========================================================================== */
+.progress-chart-wrap {
+  flex: 1;
+  min-height: 220px;
+  position: relative;
+}
+
+.timeline-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+
+/* ==========================================================================
+   13. GOALS CARD
+   ========================================================================== */
+.goal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.goal-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.goal-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+}
+
+.goal-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.goal-fraction {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.goal-bar {
+  height: 8px;
+  background: var(--gray-soft);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.goal-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  width: 0%;
+  transition: width 1.2s var(--ease);
+}
+
+
+/* ==========================================================================
+   14. QUOTE CARD (mobile duplicate placement handled via JS/CSS)
+   ========================================================================== */
+.quote-section {
+  /* placeholder section kept empty on desktop; sidebar owns the quote card */
+}
+
+
+/* ==========================================================================
+   15. BUTTONS
+   ========================================================================== */
+.btn-soft {
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  transition: all 0.3s var(--ease);
+}
+
+.btn-soft:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(124, 92, 252, 0.25);
+}
+
+.btn-soft:active {
+  transform: translateY(0);
+}
+
+
+/* ==========================================================================
+   16. ANIMATIONS
+   ========================================================================== */
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s var(--ease) both;
+}
+
+.stats-grid.fade-in { animation-delay: 0.05s; }
+.mid-grid.fade-in { animation-delay: 0.15s; }
+.bottom-grid.fade-in { animation-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* ==========================================================================
+   17. SCROLLBARS
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D9D9F0;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+
+/* ==========================================================================
+   18. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* ≤1400px : tighten grids a bit */
+@media (max-width: 1400px) {
+  .app-layout {
+    padding: 22px 24px 40px;
+    gap: 22px;
+  }
+
+  :root {
+    --sidebar-w: 270px;
+  }
+
+  .topbar-menu {
+    gap: 2px;
+  }
+
+  .menu-pill {
+    padding: 9px 14px;
+    font-size: 13.5px;
+  }
+}
+
+/* ≤1200px : sidebar becomes narrower, mid-grid to 2 cols */
+@media (max-width: 1200px) {
+  .mid-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .calendar-card {
+    grid-column: span 2;
+  }
+
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .topbar-menu {
+    display: none !important;
+  }
+}
+
+/* ≤992px : sidebar collapses to off-canvas */
+@media (max-width: 992px) {
+  .app-layout {
+    flex-direction: column;
+    /* در حالت ستونی، flex-start باعث می‌شود آیتم‌ها به اندازه محتوا (max-content)
+       عرض بگیرند و از صفحه بیرون بزنند (یا نصفه بشوند)؛ با stretch عرض کامل
+       باقی می‌ماند. سایدبار اینجا position:fixed است و تحت تأثیر قرار نمی‌گیرد. */
+    align-items: stretch;
+  }
+
+  /* موقعیت‌دهی، transform، نمایش/مخفی‌سازی و بک‌دراپ سایدبار در این حالت
+     به‌طور کامل توسط .offcanvas.offcanvas-lg بوت‌استرپ (که در تگ <aside>
+     روی #sidebar قرار دارد) مدیریت می‌شود؛ بوت‌استرپ خودش در RTL هم به‌درستی
+     جهت باز/بسته شدن را تشخیص می‌دهد، پس نیازی به بازنویسی دستی نیست. */
+
+  .brand-text {
+    display: none;
+  }
+}
+
+/* ≤768px : cards stack, mid-grid to 1 col */
+@media (max-width: 768px) {
+  .topbar-inner {
+    padding: 0 18px;
+  }
+
+  .app-layout {
+    padding: 18px 18px 32px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .mid-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-card {
+    grid-column: span 1;
+  }
+
+  .greeting-section h2 {
+    font-size: 22px;
+  }
+
+  .expense-body {
+    flex-direction: column;
+  }
+
+  .expense-chart-wrap {
+    margin: 0 auto;
+  }
+}
+
+/* ≤576px : single column everywhere */
+@media (max-width: 576px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  /* برند در موبایل فقط لوگو دارد؛ min-width دسکتاپ باعث بیرون زدن اکشن‌ها می‌شود */
+  .brand {
+    min-width: 0;
+  }
+
+  .topbar-actions {
+    min-width: auto;
+    gap: 10px;
+  }
+
+  .icon-btn, .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .panel-card, .stat-card {
+    padding: 18px;
+  }
+}
+
+
+/* ==========================================================================
+   19. FINANCE PAGE (هدر + کارت مانده + جدول تراکنش‌ها + مودال تراکنش)
+   ========================================================================== */
+
+/* Page header with action button */
+.page-header--actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-header-add {
+  margin-top: 0;
+  padding: 12px 22px;
+  font-size: 13.5px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+/* Hero balance card */
+.hero-balance {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1F2140 0%, #3A2E8A 55%, #6B55F0 120%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 22px 44px rgba(59, 46, 138, 0.35);
+  padding: 30px 32px;
+}
+
+.hero-balance::before,
+.hero-balance::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.hero-balance::before {
+  width: 260px;
+  height: 260px;
+  top: -90px;
+  left: -60px;
+  background: rgba(46, 204, 145, 0.22);
+}
+
+.hero-balance::after {
+  width: 220px;
+  height: 220px;
+  bottom: -90px;
+  right: -40px;
+  background: rgba(255, 164, 81, 0.18);
+}
+
+.hero-balance-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.hero-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 10px;
+}
+
+.hero-label i {
+  font-size: 14px;
+}
+
+.hero-amount {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.hero-unit {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 4px;
+}
+
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(46, 204, 145, 0.18);
+  color: #7FF0C4;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.hero-caption {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Transactions table */
+.tx-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+  transition: color 0.25s var(--ease);
+}
+
+.tx-view-all:hover {
+  color: var(--secondary);
+}
+
+.tx-table {
+  overflow-x: auto;
+  flex: 1;
+}
+
+.tx-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  min-width: 620px;
+}
+
+.tx-table th {
+  text-align: right;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.tx-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.tx-table tbody tr {
+  transition: background 0.25s var(--ease);
+}
+
+.tx-table tbody tr:hover {
+  background: var(--bg);
+}
+
+.tx-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tx-date {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+}
+
+.tx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.tx-badge i {
+  font-size: 10px;
+}
+
+.tx-badge--expense { background: #FDEAEC; color: #F16A6A; }
+.tx-badge--income { background: var(--green-soft); color: var(--green); }
+.tx-badge--transfer { background: var(--blue-soft); color: var(--blue); }
+
+.tx-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tx-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.tx-amount {
+  font-weight: 800;
+  font-size: 13.5px;
+}
+
+.tx-amount--pos { color: var(--green); }
+.tx-amount--neg { color: #F16A6A; }
+
+.tx-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.tx-status .status-dot {
+  width: 7px;
+  height: 7px;
+  animation: none;
+}
+
+.tx-del {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--ease);
+}
+
+.tx-del:hover {
+  background: #FDEAEC;
+  color: #F16A6A;
+}
+
+/* Chart center label */
+.chart-center {
+  position: relative;
+}
+
+.chart-center-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  pointer-events: none;
+  text-align: center;
+}
+
+.chart-center-total {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.chart-center-sub {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+/* Transaction modal */
+.modal-box--lg {
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal-sub {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin: 4px 0 16px;
+}
+
+.type-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  background: var(--bg);
+  padding: 5px;
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+}
+
+.type-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 8px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.25s var(--ease);
+}
+
+.type-tab i {
+  font-size: 12px;
+}
+
+.type-tab:hover {
+  color: var(--text-primary);
+}
+
+.type-tab.active {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(37, 39, 61, 0.08);
+}
+
+.type-tab[data-type="expense"].active { color: #F16A6A; }
+.type-tab[data-type="income"].active { color: var(--green); }
+.type-tab[data-type="transfer"].active { color: var(--blue); }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Category select (با آیکون) */
+.cat-select {
+  position: relative;
+}
+
+.cat-select-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: right;
+  transition: all 0.25s var(--ease);
+}
+
+.cat-select-btn:hover {
+  border-color: var(--primary);
+}
+
+.cat-select.open .cat-select-btn {
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.12);
+}
+
+.cat-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cat-value i,
+.cat-option i {
+  flex: 0 0 auto;
+  width: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.cat-value > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-chevron {
+  flex: 0 0 auto;
+  font-size: 11px;
+  color: var(--text-secondary);
+  transition: transform 0.25s var(--ease);
+}
+
+.cat-select.open .cat-chevron {
+  transform: rotate(180deg);
+}
+
+.cat-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hover);
+  padding: 8px;
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 264px;
+  overflow-y: auto;
+}
+
+.cat-select.open .cat-dropdown {
+  display: flex;
+  animation: fadeInUp 0.2s var(--ease) both;
+}
+
+.cat-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.cat-option > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-option:hover {
+  background: var(--bg);
+}
+
+.cat-option.active {
+  background: var(--purple-soft);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cat-option.active i {
+  color: var(--primary);
+}
+
+/* آیکون دسته‌بندی در جدول و legend */
+.tx-cat {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.tx-cat i {
+  margin-inline-end: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.expense-legend li .legend-left i {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+/* Finance page responsive tweaks */
+@media (max-width: 768px) {
+  .hero-balance {
+    padding: 24px 22px;
+  }
+
+  .hero-amount {
+    font-size: 32px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-balance-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-side {
+    align-items: flex-start;
+  }
+
+  .btn-header-add {
+    width: 100%;
+  }
+
+  .page-header--actions {
+    align-items: flex-start;
+  }
+}
