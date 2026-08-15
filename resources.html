@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منابع | رشد من</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tasks.css">
+</head>
+<body>
+
+<!-- TOP NAVBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-logo"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+      <div class="brand-text"><h1>رشد من</h1><span>هر روز، نسخه‌ی بهتر خودت باش</span></div>
+    </div>
+    <nav class="topbar-menu d-none d-lg-flex" aria-label="منوی اصلی">
+      <a href="index.html" class="menu-pill" data-page="dashboard">خانه</a>
+      <a href="tasks.html" class="menu-pill" data-page="tasks">تسک‌ها</a>
+      <a href="finance.html" class="menu-pill" data-page="finance">مالی</a>
+      <a href="reports.html" class="menu-pill" data-page="reports">گزارش‌ها</a>
+      <a href="resources.html" class="menu-pill active" data-page="resources">منابع</a>
+      <a href="about.html" class="menu-pill" data-page="about">درباره من</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="notifBtn" aria-label="اعلان‌ها">
+        <i class="fa-regular fa-bell" aria-hidden="true"></i><span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <button class="icon-btn d-lg-none" id="sidebarToggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="sidebar">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="avatar"><img src="assets/images/avatar.svg" alt="آواتار کاربر"></div>
+    </div>
+  </div>
+</header>
+
+<div class="app-layout">
+  <main class="main-content">
+
+    <section class="page-header fade-in">
+      <h2>منابع</h2>
+      <p>کتاب‌ها، دوره‌ها و ابزارهای پیشنهادی برای رشد شخصی</p>
+    </section>
+
+    <section class="resources-grid fade-in" aria-label="فهرست منابع">
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--purple">
+          <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">کتاب</span>
+          <h3>خرده‌عادت‌ها</h3>
+          <p>روشی ساده و اثبات‌شده برای ساختن عادت‌های خوب و از بین بردن عادت‌های بد.</p>
+          <span class="resource-meta">جیمز کلیر</span>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--orange">
+          <i class="fa-solid fa-brain" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">کتاب</span>
+          <h3>تفکر، سریع و کند</h3>
+          <p>دو نظامی که ذهن ما با آن تصمیم می‌گیرد؛ درسی درباره‌ی خطاهای شناختی.</p>
+          <span class="resource-meta">دنیل کانمن</span>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--green">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">دوره</span>
+          <h3>اصول مدیریت زمان</h3>
+          <p>تکنیک‌های عملی برای اولویت‌بندی، تمرکز عمیق و کاهش اتلاف وقت روزانه.</p>
+          <span class="resource-meta">ویدیویی · ۶ ساعت</span>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--blue">
+          <i class="fa-solid fa-coins" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">دوره</span>
+          <h3>آموزش بودجه‌بندی شخصی</h3>
+          <p>از ساخت بودجه‌ی ماهانه تا پس‌انداز هوشمندانه و سرمایه‌گذاری اولیه.</p>
+          <span class="resource-meta">ویدیویی · ۴ ساعت</span>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--pink">
+          <i class="fa-solid fa-dumbbell" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">ابزار</span>
+          <h3>برنامه‌ریز تمرین هفتگی</h3>
+          <p>قالب آماده برای تنظیم برنامه‌ی ورزشی متعادل و پیگیری پیشرفت بدنی.</p>
+          <span class="resource-meta">PDF قابل چاپ</span>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-thumb resource-thumb--gray">
+          <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+        </div>
+        <div class="resource-body">
+          <span class="resource-tag">ابزار</span>
+          <h3>دفترچه‌ی هدف‌گذاری</h3>
+          <p>چارچوب SMART برای تعریف اهداف واقعبینانه و پیگیری گام‌به‌گام آن‌ها.</p>
+          <span class="resource-meta">PDF قابل چاپ</span>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" aria-label="منوی کناری">
+    <nav class="sidebar-menu">
+      <a href="index.html" class="sidebar-item" data-page="dashboard"><span>داشبورد</span><i class="fa-solid fa-house" aria-hidden="true"></i></a>
+      <a href="tasks.html" class="sidebar-item" data-page="tasks"><span>تسک‌ها</span><i class="fa-regular fa-square-check" aria-hidden="true"></i></a>
+      <a href="finance.html" class="sidebar-item" data-page="finance"><span>مالی</span><i class="fa-solid fa-wallet" aria-hidden="true"></i></a>
+      <a href="reports.html" class="sidebar-item" data-page="habits"><span>گزارش‌ها</span><i class="fa-solid fa-chart-simple" aria-hidden="true"></i></a>
+      <a href="resources.html" class="sidebar-item active" data-page="resources"><span>منابع</span><i class="fa-regular fa-file-lines" aria-hidden="true"></i></a>
+      <a href="about.html" class="sidebar-item" data-page="about"><span>درباره من</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
+    </nav>
+    <div class="quote-card">
+      <div class="quote-card-icon"><i class="fa-solid fa-quote-right" aria-hidden="true"></i></div>
+      <h4>جمله انگیزشی امروز</h4>
+      <p>یادگیری، سرمایه‌ای است که همیشه همراهت می‌ماند.</p>
+      <svg class="quote-mountains" viewBox="0 0 400 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,180 0,110 60,50 120,120 170,70 230,130 280,60 340,120 400,90 400,180" fill="rgba(255,255,255,0.14)"/>
+        <polygon points="0,180 0,140 80,80 150,140 210,95 270,150 340,100 400,140 400,180" fill="rgba(255,255,255,0.22)"/>
+        <circle cx="330" cy="40" r="22" fill="rgba(255,255,255,0.35)"/>
+      </svg>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/store.js"></script>
+<script src="js/jalali.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

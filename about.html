@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درباره من | رشد من</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tasks.css">
+</head>
+<body>
+
+<!-- TOP NAVBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-logo"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+      <div class="brand-text"><h1>رشد من</h1><span>هر روز، نسخه‌ی بهتر خودت باش</span></div>
+    </div>
+    <nav class="topbar-menu d-none d-lg-flex" aria-label="منوی اصلی">
+      <a href="index.html" class="menu-pill" data-page="dashboard">خانه</a>
+      <a href="tasks.html" class="menu-pill" data-page="tasks">تسک‌ها</a>
+      <a href="finance.html" class="menu-pill" data-page="finance">مالی</a>
+      <a href="reports.html" class="menu-pill" data-page="reports">گزارش‌ها</a>
+      <a href="resources.html" class="menu-pill" data-page="resources">منابع</a>
+      <a href="about.html" class="menu-pill active" data-page="about">درباره من</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="notifBtn" aria-label="اعلان‌ها">
+        <i class="fa-regular fa-bell" aria-hidden="true"></i><span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <button class="icon-btn d-lg-none" id="sidebarToggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="sidebar">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="avatar"><img src="assets/images/avatar.svg" alt="آواتار کاربر"></div>
+    </div>
+  </div>
+</header>
+
+<div class="app-layout">
+  <main class="main-content">
+
+    <!-- Hero -->
+    <section class="card about-hero fade-in">
+      <div class="about-hero-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+      <h2>درباره‌ی «رشد من»</h2>
+      <p>«رشد من» یک داشبورد شخصیِ فارسی و راست‌چین برای پیگیری روزانه‌ی عادت‌ها، تسک‌ها، اهداف و امور مالی است. هدف این است که همه‌چیز در یک نگاه جلوی شما باشد تا هر روز نسخه‌ی کمی بهترِ خودتان باشید.</p>
+    </section>
+
+    <!-- Features -->
+    <section class="fade-in">
+      <h3 class="section-subtitle">امکانات اصلی</h3>
+      <div class="about-grid">
+        <div class="card about-feat">
+          <div class="about-feat-icon stat-icon--purple"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
+          <h4>مدیریت تسک‌ها</h4>
+          <p>ثبت، فیلتر، ویرایش و پیگیری وضعیت کارها با دسته‌بندی و اولویت.</p>
+        </div>
+        <div class="card about-feat">
+          <div class="about-feat-icon stat-icon--green"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+          <h4>مدیریت مالی</h4>
+          <p>ثبت درآمد، بودجه و هزینه‌ها با نمودار بصری سهم مخارج.</p>
+        </div>
+        <div class="card about-feat">
+          <div class="about-feat-icon stat-icon--orange"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+          <h4>پیگیری اهداف</h4>
+          <p>تعریف هدف‌های کمی و ثبت گام‌به‌گام پیشرفت تا رسیدن به نتیجه.</p>
+        </div>
+        <div class="card about-feat">
+          <div class="about-feat-icon stat-icon--blue"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+          <h4>گزارش و نمودار</h4>
+          <p>نمای کلی از پیشرفت هفتگی و وضعیت کلی با داشبورد خوانا.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section class="fade-in">
+      <h3 class="section-subtitle">چطور استفاده کنیم؟</h3>
+      <ol class="about-steps">
+        <li><span class="step-num">۱</span> از صفحه‌ی <a href="tasks.html">تسک‌ها</a> کارهای روزانه‌تان را اضافه کنید و با اولویت مرتب کنید.</li>
+        <li><span class="step-num">۲</span> در صفحه‌ی <a href="finance.html">مالی</a> درآمد و هزینه‌های ماهانه را ثبت کنید.</li>
+        <li><span class="step-num">۳</span> هدف‌های خود را در داشبورد یا <a href="reports.html">گزارش‌ها</a> تعریف و به‌روز کنید.</li>
+        <li><span class="step-num">۴</span> هر روز نگاهی به <a href="index.html">داشبورد</a> بیندازید تا پیشرفتتان را ببینید.</li>
+      </ol>
+    </section>
+
+    <!-- Tech -->
+    <section class="fade-in">
+      <div class="card about-tech">
+        <h4>ساخته‌شده با</h4>
+        <div class="about-tech-list">
+          <span><i class="fa-brands fa-html5" aria-hidden="true"></i> HTML5</span>
+          <span><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> CSS3</span>
+          <span><i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript</span>
+          <span><i class="fa-solid fa-window-restore" aria-hidden="true"></i> Bootstrap 5 RTL</span>
+          <span><i class="fa-solid fa-icons" aria-hidden="true"></i> Font Awesome</span>
+          <span><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Chart.js</span>
+        </div>
+        <p class="about-note">تمام داده‌ها به‌صورت محلی در مرورگر شما (localStorage) ذخیره می‌شوند و پس از بستن و باز کردن صفحه باقی می‌مانند.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" aria-label="منوی کناری">
+    <nav class="sidebar-menu">
+      <a href="index.html" class="sidebar-item" data-page="dashboard"><span>داشبورد</span><i class="fa-solid fa-house" aria-hidden="true"></i></a>
+      <a href="tasks.html" class="sidebar-item" data-page="tasks"><span>تسک‌ها</span><i class="fa-regular fa-square-check" aria-hidden="true"></i></a>
+      <a href="finance.html" class="sidebar-item" data-page="finance"><span>مالی</span><i class="fa-solid fa-wallet" aria-hidden="true"></i></a>
+      <a href="reports.html" class="sidebar-item" data-page="habits"><span>گزارش‌ها</span><i class="fa-solid fa-chart-simple" aria-hidden="true"></i></a>
+      <a href="resources.html" class="sidebar-item" data-page="resources"><span>منابع</span><i class="fa-regular fa-file-lines" aria-hidden="true"></i></a>
+      <a href="about.html" class="sidebar-item active" data-page="about"><span>درباره من</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
+    </nav>
+    <div class="quote-card">
+      <div class="quote-card-icon"><i class="fa-solid fa-quote-right" aria-hidden="true"></i></div>
+      <h4>جمله انگیزشی امروز</h4>
+      <p>بهترین زمان برای شروع، همین حالا بود؛ دومین زمان خوب، همین امروز است.</p>
+      <svg class="quote-mountains" viewBox="0 0 400 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,180 0,110 60,50 120,120 170,70 230,130 280,60 340,120 400,90 400,180" fill="rgba(255,255,255,0.14)"/>
+        <polygon points="0,180 0,140 80,80 150,140 210,95 270,150 340,100 400,140 400,180" fill="rgba(255,255,255,0.22)"/>
+        <circle cx="330" cy="40" r="22" fill="rgba(255,255,255,0.35)"/>
+      </svg>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/store.js"></script>
+<script src="js/jalali.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

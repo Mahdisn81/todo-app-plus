@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مدیریت مالی | رشد من</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Bootstrap 5 RTL -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tasks.css">
+</head>
+<body>
+
+<!-- ======================================================
+     TOP NAVBAR
+====================================================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <div class="brand">
+      <div class="brand-logo"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+      <div class="brand-text">
+        <h1>رشد من</h1>
+        <span>هر روز، نسخه‌ی بهتر خودت باش</span>
+      </div>
+    </div>
+
+    <nav class="topbar-menu d-none d-lg-flex" aria-label="منوی اصلی">
+      <a href="index.html" class="menu-pill" data-page="dashboard">خانه</a>
+      <a href="tasks.html" class="menu-pill" data-page="tasks">تسک‌ها</a>
+      <a href="finance.html" class="menu-pill active" data-page="finance">مالی</a>
+      <a href="reports.html" class="menu-pill" data-page="reports">گزارش‌ها</a>
+      <a href="resources.html" class="menu-pill" data-page="resources">منابع</a>
+      <a href="about.html" class="menu-pill" data-page="about">درباره من</a>
+    </nav>
+
+    <div class="topbar-actions">
+      <button class="icon-btn" id="notifBtn" aria-label="اعلان‌ها">
+        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+      <button class="icon-btn d-lg-none" id="sidebarToggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="sidebar">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="avatar"><img src="assets/images/avatar.svg" alt="آواتار کاربر"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================================================
+     MAIN LAYOUT
+====================================================== -->
+<div class="app-layout">
+
+  <main class="main-content">
+
+    <section class="page-header page-header--actions fade-in">
+      <div>
+        <h2>مدیریت مالی</h2>
+        <p>پیگیری درآمد، بودجه و مخارج ماهانه</p>
+      </div>
+      <button class="btn-primary-gradient btn-header-add" id="addTxBtn" type="button">
+        <i class="fa-solid fa-plus" aria-hidden="true"></i> افزودن تراکنش
+      </button>
+    </section>
+
+    <!-- Hero balance -->
+    <section class="card hero-balance fade-in">
+      <div class="hero-balance-inner">
+        <div>
+          <p class="hero-label"><i class="fa-solid fa-wallet" aria-hidden="true"></i> موجودی فعلی</p>
+          <div class="hero-amount" id="heroBalance">۰</div>
+          <p class="hero-unit">تومان</p>
+        </div>
+        <div class="hero-side">
+          <span class="hero-badge"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> ۱۲.۵٪</span>
+          <span class="hero-caption">نسبت به ماه قبل</span>
+          <span class="hero-status"><span class="status-dot" aria-hidden="true"></span> وضعیت: مطلوب</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary cards -->
+    <section class="stats-grid fade-in">
+      <div class="card stat-card stat-card--finance">
+        <div class="stat-card-head">
+          <h3>درآمد این ماه</h3>
+          <div class="stat-icon stat-icon--green"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+        </div>
+        <div class="stat-number stat-number--fa" id="finIncome">۰</div>
+        <div class="stat-sub">تومان</div>
+        <button class="btn btn-soft w-100" id="editIncomeBtn" type="button">
+          <i class="fa-solid fa-pen" aria-hidden="true"></i> ویرایش درآمد
+        </button>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-head">
+          <h3>هزینه‌ی این ماه</h3>
+          <div class="stat-icon stat-icon--orange"><i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i></div>
+        </div>
+        <div class="stat-number stat-number--fa finance-value--neg" id="finSpent">۰</div>
+        <div class="stat-sub">تومان</div>
+        <div class="progress soft-progress" style="margin-top:14px">
+          <div class="progress-bar" id="finBudgetBar" data-width="0" style="background:var(--orange);width:0%"></div>
+        </div>
+        <div class="stat-foot" id="finBudgetFoot">۰٪ از بودجه</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-head">
+          <h3>پس‌انداز</h3>
+          <div class="stat-icon stat-icon--purple"><i class="fa-solid fa-piggy-bank" aria-hidden="true"></i></div>
+        </div>
+        <div class="stat-number stat-number--fa" id="finBalance">۰</div>
+        <div class="stat-sub">تومان</div>
+        <div class="progress soft-progress" style="margin-top:14px">
+          <div class="progress-bar" id="finBalanceBar" data-width="0" style="background:var(--green);width:0%"></div>
+        </div>
+        <div class="stat-foot" id="finBalanceFoot">۰٪ از درآمد</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-head">
+          <h3>بودجه‌ی ماه</h3>
+          <div class="stat-icon stat-icon--blue"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+        </div>
+        <div class="stat-number stat-number--fa" id="finBudget">۰</div>
+        <div class="stat-sub">تومان</div>
+        <button class="btn btn-soft w-100" id="editBudgetBtn" type="button">
+          <i class="fa-solid fa-pen" aria-hidden="true"></i> ویرایش بودجه
+        </button>
+      </div>
+    </section>
+
+    <!-- Transactions + categories -->
+    <section class="bottom-grid fade-in">
+      <div class="card panel-card">
+        <div class="panel-head">
+          <h3 class="panel-title">
+            <span class="panel-icon"><i class="fa-solid fa-arrow-right-left" aria-hidden="true"></i></span>
+            تراکنش‌های اخیر
+          </h3>
+          <a href="#" class="tx-view-all" id="txViewAll">مشاهده همه <i class="fa-solid fa-chevron-left" aria-hidden="true"></i></a>
+        </div>
+        <div class="tx-table" id="txTable"></div>
+      </div>
+
+      <div class="card panel-card">
+        <div class="panel-head">
+          <h3 class="panel-title">
+            <span class="panel-icon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></span>
+            دسته‌بندی هزینه‌ها
+          </h3>
+        </div>
+        <div class="expense-body finance-chart-body">
+          <div class="expense-chart-wrap expense-chart-wrap--lg chart-center" role="img" aria-label="نمودار دسته‌بندی هزینه‌ها">
+            <canvas id="expChart"></canvas>
+            <div class="chart-center-label">
+              <span class="chart-center-total" id="expenseTotal">۰</span>
+              <span class="chart-center-sub">کل هزینه‌ها</span>
+            </div>
+          </div>
+          <ul class="expense-legend" id="expenseLegend"></ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar" aria-label="منوی کناری">
+    <nav class="sidebar-menu">
+      <a href="index.html" class="sidebar-item" data-page="dashboard">
+        <span>داشبورد</span><i class="fa-solid fa-house" aria-hidden="true"></i>
+      </a>
+      <a href="tasks.html" class="sidebar-item" data-page="tasks">
+        <span>تسک‌ها</span><i class="fa-regular fa-square-check" aria-hidden="true"></i>
+      </a>
+      <a href="finance.html" class="sidebar-item active" data-page="finance">
+        <span>مالی</span><i class="fa-solid fa-wallet" aria-hidden="true"></i>
+      </a>
+      <a href="reports.html" class="sidebar-item" data-page="habits">
+        <span>گزارش‌ها</span><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+      </a>
+      <a href="resources.html" class="sidebar-item" data-page="resources">
+        <span>منابع</span><i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+      </a>
+      <a href="about.html" class="sidebar-item" data-page="about">
+        <span>درباره من</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+      </a>
+    </nav>
+
+    <div class="quote-card">
+      <div class="quote-card-icon"><i class="fa-solid fa-quote-right" aria-hidden="true"></i></div>
+      <h4>جمله انگیزشی امروز</h4>
+      <p>پس‌اندازِ امروز، آرامشِ فرداست.</p>
+      <svg class="quote-mountains" viewBox="0 0 400 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,180 0,110 60,50 120,120 170,70 230,130 280,60 340,120 400,90 400,180" fill="rgba(255,255,255,0.14)"/>
+        <polygon points="0,180 0,140 80,80 150,140 210,95 270,150 340,100 400,140 400,180" fill="rgba(255,255,255,0.22)"/>
+        <circle cx="330" cy="40" r="22" fill="rgba(255,255,255,0.35)"/>
+      </svg>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+</div>
+
+<!-- Edit modal (income / budget) -->
+<div class="modal-overlay" id="editModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">ویرایش</h3>
+    <div class="form-group" style="margin-top:14px">
+      <label for="modalValue">مبلغ به تومان</label>
+      <input type="number" id="modalValue" class="form-control-soft" min="0">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="modalCancel" type="button">انصراف</button>
+      <button class="btn-primary-gradient" id="modalSave" type="button">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add transaction modal -->
+<div class="modal-overlay" id="transactionModal" aria-hidden="true">
+  <div class="modal-box modal-box--lg" role="dialog" aria-modal="true" aria-labelledby="txModalTitle">
+    <h3 id="txModalTitle">افزودن تراکنش جدید</h3>
+    <p class="modal-sub">فرم زیر را برای ثبت تراکنش تکمیل کنید</p>
+
+    <div class="type-tabs" role="tablist" aria-label="نوع تراکنش">
+      <button type="button" class="type-tab active" data-type="expense" role="tab" aria-selected="true">
+        <i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i> هزینه
+      </button>
+      <button type="button" class="type-tab" data-type="income" role="tab" aria-selected="false">
+        <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> درآمد
+      </button>
+      <button type="button" class="type-tab" data-type="transfer" role="tab" aria-selected="false">
+        <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i> انتقال
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label for="txTitle">عنوان</label>
+      <input type="text" id="txTitle" class="form-control-soft" placeholder="مثلاً خرید کتاب" required>
+    </div>
+
+    <div class="form-group">
+      <label id="txCategoryLabel">دسته‌بندی</label>
+      <div class="cat-select" id="catSelect">
+        <button type="button" class="cat-select-btn" id="catSelectBtn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="txCategoryLabel">
+          <span class="cat-value" id="txCategory"></span>
+          <i class="fa-solid fa-chevron-down cat-chevron" aria-hidden="true"></i>
+        </button>
+        <ul class="cat-dropdown" id="catDropdown" role="listbox" aria-labelledby="txCategoryLabel"></ul>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="txValue">مبلغ (تومان)</label>
+        <input type="number" id="txValue" class="form-control-soft" placeholder="مثلاً ۵۰۰۰۰۰" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="txDate">تاریخ</label>
+        <input type="text" id="txDate" class="form-control-soft" dir="rtl">
+      </div>
+    </div>
+
+    <div class="form-group" id="txColorGroup">
+      <label>رنگ</label>
+      <div class="color-picker" id="txColorPicker" role="radiogroup" aria-label="انتخاب رنگ">
+        <button type="button" class="color-dot active" data-color="#7C5CFC" style="background:#7C5CFC" aria-label="بنفش"></button>
+        <button type="button" class="color-dot" data-color="#FFA451" style="background:#FFA451" aria-label="نارنجی"></button>
+        <button type="button" class="color-dot" data-color="#2ECC91" style="background:#2ECC91" aria-label="سبز"></button>
+        <button type="button" class="color-dot" data-color="#4FA3F7" style="background:#4FA3F7" aria-label="آبی"></button>
+        <button type="button" class="color-dot" data-color="#FF6FA5" style="background:#FF6FA5" aria-label="صورتی"></button>
+        <button type="button" class="color-dot" data-color="#C9CBDA" style="background:#C9CBDA" aria-label="خاکستری"></button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="txNote">توضیحات (اختیاری)</label>
+      <textarea id="txNote" class="form-control-soft" rows="2" placeholder="توضیحات تراکنش..."></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-ghost" id="txCancel" type="button">انصراف</button>
+      <button class="btn-primary-gradient" id="txSave" type="button"><i class="fa-solid fa-check" aria-hidden="true"></i> ثبت تراکنش</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="js/store.js"></script>
+<script src="js/jalali.js"></script>
+<script src="js/app.js"></script>
+<script src="js/finance.js"></script>
+</body>
+</html>
